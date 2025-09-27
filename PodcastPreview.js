@@ -56,5 +56,48 @@ class PodcastPreview extends HTMLElement {
             detail: { podcastId: this._podcastData.id }
         }));
     } 
+  /**
+     * Renders the component UI using the current podcast data.
+     * Updates the text content and attributes of the elements inside the Shadow DOM.
+     * @private
+     * @returns {void}
+     */
+    _render() {
+        if (!this._podcastData || !this._podcastData.id) return;
+
+        const { title, image, seasons, genres, updated } = this._podcastData;
+
+        // 1. Cover Image
+        const coverEl = this.shadowRoot.querySelector('.podcast-cover');
+        if (coverEl) {
+            coverEl.src = image;
+            coverEl.alt = `${title} cover`;
+        }
+
+        // 2. Title
+        this.shadowRoot.querySelector('.podcast-title').textContent = title || 'Untitled Podcast';
+
+        // 3. Seasons Count
+        const seasonsCount = typeof seasons === 'number' ? seasons : parseInt(seasons) || 0;
+        const seasonsText = `${seasonsCount} season${seasonsCount !== 1 ? 's' : ''}`;
+        this.shadowRoot.querySelector('.seasons-count p').textContent = seasonsText;
+
+        // 4. Genre Tags
+        const genresContainer = this.shadowRoot.querySelector('.genre-tags');
+        genresContainer.innerHTML = "";
+        // Ensure GenreService is available and provides names
+        if (GenreService.getNames) {
+             GenreService.getNames(genres).forEach(genre => {
+                const span = document.createElement("span");
+                span.classList.add("genre-tag");
+                span.textContent = genre;
+                genresContainer.appendChild(span);
+            });
+        }
+
+        // 5. Last Updated Date (Human-readable format)
+        const updatedDate = DateUtils.relativeFormat(updated);
+        this.shadowRoot.querySelector('.last-updated').textContent = `Updated: ${updatedDate}`;
+    }  
     
 }
