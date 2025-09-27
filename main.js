@@ -82,4 +82,47 @@ const sortPodcasts = (list, sortBy) => {
     return sortedList;
 };
 
+/**
+ * Orchestrates the filtering and sorting process based on current dropdown selections,
+ * then renders the results to the grid.
+ * @returns {void}
+ */
+const filterAndSortPodcasts = () => {
+    // Safely get selected values, defaulting to state that shows all
+    const selectedGenreId = genresDropdown ? genresDropdown.value : 'all';
+    const sortBy = sortDropdown ? sortDropdown.value : 'updated-desc'; 
 
+    let filteredPodcasts = [...podcasts];
+
+    // --- 1. Filter by genre ---
+    if (selectedGenreId !== "all") {
+        const genreIdNum = parseInt(selectedGenreId);
+        filteredPodcasts = filteredPodcasts.filter((podcast) =>
+            // Check if the podcast's genres array includes the selected genre ID
+            podcast.genres.includes(genreIdNum)
+        );
+    }
+
+    // --- 2. Sort the filtered list ---
+    const finalSortedPodcasts = sortPodcasts(filteredPodcasts, sortBy);
+
+    // --- 3. Render the results ---
+    podcastGrid.render(finalSortedPodcasts);
+};
+
+// --- Initialization & Listeners ---
+
+// Add event listeners for dynamic filtering/sorting
+if (genresDropdown) {
+    genresDropdown.addEventListener("change", filterAndSortPodcasts);
+}
+if (sortDropdown) {
+    sortDropdown.addEventListener("change", filterAndSortPodcasts);
+}
+
+// Initial application setup upon DOM load
+document.addEventListener("DOMContentLoaded", () => {
+    populateGenresDropdown();
+    // Run the filter/sort on load to populate the initial grid state
+    filterAndSortPodcasts(); 
+});
