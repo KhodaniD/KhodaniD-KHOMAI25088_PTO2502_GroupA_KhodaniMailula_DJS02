@@ -1,0 +1,286 @@
+/* Global Styles & CSS Reset */
+:root {
+    --primary-color: #3498db;    /* Blue for main accents */
+    --secondary-color: #2c3e50;  /* Dark text/header color */
+    --background-color: #ecf0f1; /* Light gray body background */
+    --card-bg-color: #ffffff;    /* White card background */
+    --text-color: #333333;       /* Standard body text color */
+    --light-text-color: #7f8c8d; /* Muted text (dates, seasons) */
+    --border-color: #bdc3c7;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --accent-color: #3498db; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.podcast-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.podcast-icon {
+    font-size: 32px;
+    color: var(--secondary-color);
+}
+
+.app-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+
+/* Filter Bar Styles (Dropdowns are horizontal on desktop) */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    flex-wrap: wrap; 
+}
+
+.filter-bar p {
+    font-weight: 500;
+    /* On desktop, the "Filter by:" label is inline */
+}
+
+.dropdown-container {
+    flex-shrink: 0; 
+}
+
+.dropdown-container select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--card-bg-color);
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Podcast Grid Styles (Desktop Multi-Column) */
+.podcast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 30px;
+    grid-auto-rows: minmax(min-content, max-content); 
+}
+
+/* Ensure the custom element adheres to the grid slot */
+podcast-preview {
+    width: 100%;
+}
+
+
+/* Modal Styles (For details view) */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--light-text-color);
+    cursor: pointer;
+}
+
+.main-details-section {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.modal-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-light);
+    object-fit: contain;
+}
+
+.details-text-container {
+    flex: 1;
+}
+
+.modal-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-genre-tag {
+    background-color: var(--primary-color);
+    color: var(--card-bg-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.modal-updated {
+    font-size: 0.9rem;
+    color: var(--light-text-color);
+}
+
+.seasons-list-section {
+    margin-top: 20px;
+}
+
+.seasons-list-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.modal-seasons-list {
+    list-style: none;
+}
+
+.season-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.season-item:last-child {
+    border-bottom: none;
+}
+
+.season-item h4 {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+
+.episode-count {
+    font-size: 0.9rem;
+    color: var(--light-text-color);
+}
+
+/* --- Media Queries for Mobile Responsiveness (Screen width <= 768px) --- */
+@media (max-width: 768px) {
+    /* Adjust body padding for true mobile width */
+    body {
+        padding: 10px; 
+    }
+    .app-title {
+        font-size: 1.8rem;
+    }
+    
+    /* 1. Filter Bar Layout: Label on top, Dropdowns side-by-side */
+    .filter-bar {
+        flex-direction: row; /* Keep elements in a row */
+        flex-wrap: wrap; 
+        align-items: center; 
+        gap: 10px; 
+        margin-bottom: 20px;
+    }
+
+    .filter-bar p {
+        width: 100%; /* Forces label to take full width and stack */
+        margin-bottom: 0;
+        font-weight: 600;
+    }
+    
+    .dropdown-container {
+        /* Distributes remaining horizontal space equally */
+        flex: 1 1 0; 
+        min-width: 130px; 
+    }
+    
+    .dropdown-container select {
+        width: 100%;
+    }
+
+    /* 2. Podcast Grid: Single column, full width cards */
+    .podcast-grid {
+        grid-template-columns: 1fr; 
+        gap: 20px; 
+    }
+    
+    podcast-preview {
+        width: 100%;
+    }
+
+    /* 3. Modal adjustments */
+    .main-details-section {
+        flex-direction: column;
+    }
+    .modal-image {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto 15px auto;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+}
