@@ -25,7 +25,7 @@ class PodcastPreview extends HTMLElement {
         this.shadowRoot.addEventListener('click', this._handleClick.bind(this));
     }
 
-   /**
+    /**
      * Public setter for the podcast data. Triggers a re-render of the component.
      * Adheres to the requirement of being stateless and reliant on external data.
      * @param {Object} podcast - The podcast data object containing id, title, image, seasons, genres, and updated date.
@@ -55,8 +55,9 @@ class PodcastPreview extends HTMLElement {
             composed: true, // Allows the event to escape the Shadow DOM
             detail: { podcastId: this._podcastData.id }
         }));
-    } 
-  /**
+    }
+
+    /**
      * Renders the component UI using the current podcast data.
      * Updates the text content and attributes of the elements inside the Shadow DOM.
      * @private
@@ -98,7 +99,8 @@ class PodcastPreview extends HTMLElement {
         // 5. Last Updated Date (Human-readable format)
         const updatedDate = DateUtils.relativeFormat(updated);
         this.shadowRoot.querySelector('.last-updated').textContent = `Updated: ${updatedDate}`;
-    }  
+    }
+
     /**
      * Returns the HTML template string for the Shadow DOM, including encapsulated CSS.
      * @returns {string} The HTML template string.
@@ -194,7 +196,8 @@ class PodcastPreview extends HTMLElement {
                     color: var(--light-text-color, #666);
                     margin-top: 4px;
                 }
-/* --- MOBILE RESPONSIVENESS FIX --- */
+
+                /* --- MOBILE RESPONSIVENESS FIX (CRITICAL for Card Sizing) --- */
                 @media (max-width: 768px) {
                     .podcast-card {
                         /* Ensures the card fills the single column on mobile */
