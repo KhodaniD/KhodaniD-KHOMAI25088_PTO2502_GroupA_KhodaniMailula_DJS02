@@ -99,5 +99,98 @@ class PodcastPreview extends HTMLElement {
         const updatedDate = DateUtils.relativeFormat(updated);
         this.shadowRoot.querySelector('.last-updated').textContent = `Updated: ${updatedDate}`;
     }  
-    
-}
+    /**
+     * Returns the HTML template string for the Shadow DOM, including encapsulated CSS.
+     * @returns {string} The HTML template string.
+     */
+    getTemplate() {
+        return `
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+                :host {
+                    display: block;
+                    cursor: pointer;
+                    min-width: 0;
+                }
+
+                .podcast-card {
+                    background-color: var(--card-bg-color, #fff);
+                    border-radius: 8px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.2s, box-shadow 0.2s;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                }
+
+                .podcast-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                }
+
+                .podcast-cover {
+                    width: 100%;
+                    height: 240px;
+                    /* Updated to 'cover' for better mobile filling, but 'contain' was in your original */
+                    object-fit: contain; 
+                    object-position: center;
+                    display: block;
+                    margin: 0;
+                    border-top-left-radius: 8px;
+                    border-top-right-radius: 8px;
+                    background-color: #f4f4f4;
+                }
+
+                .podcast-info {
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .podcast-title {
+                    font-size: 1.1rem;
+                    line-height: 1.3;
+                    margin: 0 0 6px 0;
+                    color: var(--primary-color, #0077cc);
+                }
+
+                .podcast-details-top {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .seasons-count {
+                    display: flex;
+                    align-items: center;
+                    font-size: 0.85rem;
+                    color: var(--light-text-color, #666);
+                    margin-bottom: 4px;
+                }
+
+                .seasons-icon {
+                    font-size: 16px;
+                    margin-right: 4px;
+                }
+
+                .genre-tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 5px;
+                    margin-bottom: 4px;
+                }
+
+                .genre-tag {
+                    font-size: 0.75rem;
+                    background-color: var(--accent-color, var(--primary-color, #0077cc));
+                    color: white;
+                    padding: 2px 8px;
+                    border-radius: 12px;
+                    white-space: nowrap;
+                }
+
+                .last-updated {
+                    font-size: 0.75rem;
+                    color: var(--light-text-color, #666);
+                    margin-top: 4px;
+                }
