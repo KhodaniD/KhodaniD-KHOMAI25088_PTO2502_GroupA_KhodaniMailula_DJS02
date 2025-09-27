@@ -194,3 +194,38 @@ class PodcastPreview extends HTMLElement {
                     color: var(--light-text-color, #666);
                     margin-top: 4px;
                 }
+/* --- MOBILE RESPONSIVENESS FIX --- */
+                @media (max-width: 768px) {
+                    .podcast-card {
+                        /* Ensures the card fills the single column on mobile */
+                        width: 100%;
+                        max-width: none;
+                        margin: 0; 
+                    }
+                    
+                    .podcast-cover {
+                        height: auto; 
+                        max-height: 300px; 
+                    }
+                }
+            </style>
+
+            <div class="podcast-card">
+                <img class="podcast-cover" src="" alt="">
+                <div class="podcast-info">
+                    <h3 class="podcast-title"></h3>
+                    <div class="podcast-details-top">
+                        <div class="seasons-count">
+                            <span class="material-symbols-outlined seasons-icon">calendar_month</span>
+                            <p></p>
+                        </div>
+                        <div class="genre-tags"></div>
+                    </div>
+                    <p class="last-updated"></p>
+                </div>
+            </div>
+        `;
+    }
+}
+
+window.customElements.define('podcast-preview', PodcastPreview);
