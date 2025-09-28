@@ -2,7 +2,7 @@
 
 import { DateUtils } from "./DateUtils.js";
 import { GenreService } from "./GenreService.js";
-import { seasons } from "./data.js"; // Note: Only 'seasons' is needed here, 'podcasts' is not.
+import { seasons } from "./data.js"; 
 
 /**
  * @file A factory function to create and manage the podcast detail modal.

@@ -27,7 +27,6 @@ class PodcastPreview extends HTMLElement {
 
     /**
      * Public setter for the podcast data. Triggers a re-render of the component.
-     * Adheres to the requirement of being stateless and reliant on external data.
      * @param {Object} podcast - The podcast data object containing id, title, image, seasons, genres, and updated date.
      */
     set data(podcast) {

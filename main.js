@@ -8,7 +8,7 @@ import "./PodcastPreview.js";
 const genresDropdown = document.getElementById("genres-dropdown");
 const sortDropdown = document.getElementById("sort-dropdown");
 
-// Instantiate the grid factory (assuming 'createGrid' handles DOM rendering)
+// Instantiate the grid factory 
 const podcastGrid = createGrid();
 
 /**
